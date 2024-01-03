@@ -42,4 +42,4 @@ The RevPay project aims to develop a secure, user-friendly, and versatile financ
 
 ## Architecture Diagram
 
-![Architecture diagram](image-2.png)
+![Architecture diagram](architecture.drawio.png)

@@ -23,7 +23,6 @@
     <table *ngIf="loans.length" class="w-full text-center mt-4">
       <thead>
         <tr>
-          <th>User</th>
           <th>Amount</th>
           <th>Status</th>
           <th>Actions</th>
@@ -31,7 +30,6 @@
       </thead>
       <tbody>
         <tr *ngFor="let loan of loans">
-          <td></td>
           <td *ngIf="loan.status === 'pending'">
             {{ loan.amount | currency }}
           </td>
