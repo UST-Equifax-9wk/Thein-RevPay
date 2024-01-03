@@ -1,0 +1,101 @@
+<app-nav>
+  <header class="bg-white shadow">
+    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900">Dashboard</h1>
+    </div>
+  </header>
+
+  <main>
+    <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+      <h2 class="uppercase text-md font-bold text-gray-700">Bank accounts</h2>
+      <hr class="mt-4 mb-2" />
+      <div class="flex flex-col gap-4 py-4">
+        <h3 class="uppercase text-sm font-bold text-gray-700">
+          Checking accounts
+        </h3>
+        <div
+          *ngFor="let bankAccount of checkingAccounts; index as i"
+          class="shadow-md ring-1 py-2 px-4 rounded-md ring-slate-300 flex justify-between items-center"
+        >
+          <div class="flex gap-4 items-center w-full">
+            <div class="rounded-full w-8 h-8 bg-black mr-3"></div>
+            <div class="flex-grow text-sm font-bold text-gray-600">
+              {{ bankAccount.accountNumber }}
+            </div>
+            <div class="text-sm font-bold text-gray-700">
+              {{ bankAccount.balance | currency }}
+            </div>
+          </div>
+          <button
+            (click)="viewDetail(bankAccount.id)"
+            class="flex-shrink-0 ml-4 flex w-30 justify-center rounded-md bg-gray-600 px-6 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >
+            View details
+          </button>
+        </div>
+      </div>
+      <hr class="mt-4 mb-2" />
+      <div class="flex flex-col gap-4 py-4">
+        <h3 class="uppercase text-sm font-bold text-gray-700">
+          Saving accounts
+        </h3>
+        <div
+          *ngFor="let bankAccount of savingAccounts; index as i"
+          class="shadow-md ring-1 py-2 px-4 rounded-md ring-slate-300 flex justify-between items-center"
+        >
+          <div class="flex gap-4 items-center w-full">
+            <div class="rounded-full w-8 h-8 bg-black mr-3"></div>
+            <div class="flex-grow text-sm font-bold text-gray-600">
+              {{ bankAccount.accountNumber }}
+            </div>
+            <div class="text-sm font-bold text-gray-700">
+              {{ bankAccount.balance | currency }}
+            </div>
+          </div>
+          <button
+            (click)="viewDetail(bankAccount.id)"
+            class="flex-shrink-0 ml-4 flex w-30 justify-center rounded-md bg-gray-600 px-6 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >
+            View details
+          </button>
+        </div>
+      </div>
+      <hr class="mt-4 mb-2" />
+      <div class="flex flex-col gap-4 py-4">
+        <h3 class="uppercase text-sm font-bold text-gray-700">
+          Business accounts
+        </h3>
+        <div
+          *ngFor="let bankAccount of businessAccounts; index as i"
+          class="shadow-md ring-1 py-2 px-4 rounded-md ring-slate-300 flex justify-between items-center"
+        >
+          <div class="flex gap-4 items-center w-full">
+            <div class="rounded-full w-8 h-8 bg-black mr-3"></div>
+            <div class="flex-grow text-sm font-bold text-gray-600">
+              {{ bankAccount.accountNumber }}
+            </div>
+            <div class="text-sm font-bold text-gray-700">
+              {{ bankAccount.balance | currency }}
+            </div>
+          </div>
+          <button
+            (click)="viewDetail(bankAccount.id)"
+            class="flex-shrink-0 ml-4 flex w-30 justify-center rounded-md bg-gray-600 px-6 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >
+            View details
+          </button>
+        </div>
+        <hr class="mt-4 mb-2" />
+        <div class="flex items-center justify-end">
+          <div class="uppercase text-sm font-bold text-gray-700 mr-3">
+            Total balance
+          </div>
+          <div class="text-sm font-bold text-gray-700">
+            {{ totalBalance | currency }}
+          </div>
+          <div class="w-56"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+</app-nav>

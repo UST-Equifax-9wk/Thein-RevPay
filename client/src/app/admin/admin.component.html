@@ -1,0 +1,55 @@
+<app-nav>
+  <div class="flex">
+    <input
+      (click)="onSearch(false)"
+      type="search"
+      id="menu-button"
+      aria-expanded="true"
+      aria-haspopup="true"
+      placeholder="Search customer..."
+      class="mx-8"
+    />
+  </div>
+  <div
+    *ngIf="(selectedCustomer | json) !== '{}'"
+    class="mx-8 m-2 text-gray-700 font-semibold"
+  >
+    <app-customer [customer]="selectedCustomer"></app-customer>
+  </div>
+  <div
+    class="bg-white rounded-lg p-4 shadow-md my-4 mx-4 text-ml font-bold text-gray-600"
+  >
+    <h2>Pending loan applications</h2>
+    <table *ngIf="loans.length" class="w-full text-center mt-4">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Amount</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let loan of loans">
+          <td></td>
+          <td *ngIf="loan.status === 'pending'">
+            {{ loan.amount | currency }}
+          </td>
+          <td *ngIf="loan.status === 'pending'">
+            {{ loan.status | titlecase }}
+          </td>
+          <td *ngIf="loan.status === 'pending'">
+            <button (click)="onApprove(loan)">Approve</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</app-nav>
+
+<app-customer-search-model
+  [modelState]="searchState"
+  (onCancelEvent)="onSearch($event)"
+  (onSelectEvent)="onSelect($event)"
+>
+</app-customer-search-model>

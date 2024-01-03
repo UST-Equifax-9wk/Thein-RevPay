@@ -1,0 +1,62 @@
+<app-model [modelState]="formState">
+  <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">
+    Send money by Username or Email
+  </h3>
+  <div class="mt-4 w-full min-h-64">
+    <form class="flex gap-2 items-center" (ngSubmit)="onSearch()">
+      <input
+        [(ngModel)]="usernameOrEmail"
+        name="usernameOrEmail"
+        type="search"
+        placeholder="Search by username or email..."
+      />
+      <button type="submit" class="h-9">Search</button>
+    </form>
+
+    <div *ngIf="foundUsers[0].id">
+      <div
+        *ngFor="let foundUser of foundUsers"
+        class="text-sm font-bold text-gray-500 py-4 px-2 shadow-md ring-gray-300 ring-1 my-2 rounded-md flex flex-col gap-1"
+      >
+        <div>
+          <span>Full name: </span
+          >{{ foundUser.firstName + " " + foundUser.lastName }}
+        </div>
+        <div><span>Email: </span>{{ foundUser.email }}</div>
+        <div><span>Username: </span>{{ foundUser.username }}</div>
+        <div class="text-sm font-bold text-gray-500 pt-2">Bank accounts</div>
+        <div
+          *ngFor="let account of foundUser.bankAccounts"
+          [ngClass]="{ 'bg-blue-100': selectedAccount === account }"
+          class="text-sm font-bold text-gray-500 py-5 pl-2 pr-4 shadow-md ring-gray-300 ring-1 my-2 rounded-md flex gap-1 items-center"
+        >
+          <div class="flex-grow">
+            {{ account.type | titlecase }} ending in ...
+            {{ account.accountNumber.slice(-4) }}
+          </div>
+          <div *ngIf="selectedAccount === account">
+            <label class="text-xs font-bold">Amount</label
+            ><input
+              [(ngModel)]="amount"
+              id="amount"
+              name="amount"
+              type="number"
+            />
+          </div>
+          <button
+            *ngIf="selectedAccount !== account; else sendBtn"
+            (click)="onSelectAccount(account, foundUser)"
+          >
+            Select
+          </button>
+          <ng-template #sendBtn>
+            <div><button (click)="onSend(account)">Send</button></div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="px-4 py-3 flex justify-end w-full border-t-2">
+    <button (click)="onCancel()">Cancel</button>
+  </div>
+</app-model>

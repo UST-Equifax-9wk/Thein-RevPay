@@ -1,0 +1,46 @@
+<app-model [modelState]="modelState"
+  ><form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    class="w-full"
+    id="add-card"
+  >
+    <div>
+      <label for="nameOnCard">Name on card</label>
+      <input
+        type="text"
+        name="nameOnCard"
+        id="nameOnCard"
+        formControlName="nameOnCard"
+      />
+    </div>
+    <div>
+      <label for="cardNumber">Card number</label>
+      <input
+        type="text"
+        name="cardNumber"
+        id="cardNumber"
+        formControlName="cardNumber"
+      />
+    </div>
+    <div>
+      <label for="svc">Security code</label>
+      <input type="password" name="svc" id="svc" formControlName="svc" />
+    </div>
+    <div>
+      <label for="expirationDate">Expiration Date</label>
+      <input
+        type="date"
+        name="expirationDate"
+        id="expirationDate"
+        formControlName="expirationDate"
+      />
+    </div>
+    <div class="w-full flex gap-8 pt-8 pb-2">
+      <button type="submit" form="add-card" class="flex-grow">Add card</button>
+      <button type="button" (click)="onCancel()" class="flex-grow">
+        Cancel
+      </button>
+    </div>
+  </form>
+</app-model>

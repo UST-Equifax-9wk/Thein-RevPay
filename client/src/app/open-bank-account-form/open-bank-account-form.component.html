@@ -1,0 +1,61 @@
+<app-model [modelState]="formState">
+  <div class="w-full">
+    <h3>Open a new bank account</h3>
+    <hr class="my-4" />
+    <form
+      class="flex flex-col gap-3"
+      (ngSubmit)="onOpenNewAccount()"
+      [formGroup]="newAccountForm"
+      id="new-account"
+    >
+      <div>
+        <label for="accountNumber">Account number</label>
+        <input
+          type="text"
+          name="accountNumber"
+          id="accountNumber"
+          formControlName="accountNumber"
+        />
+      </div>
+      <div>
+        <label for="routingNumber">Routing number</label>
+        <input
+          type="text"
+          name="routingNumber"
+          id="routingNumber"
+          formControlName="routingNumber"
+        />
+      </div>
+      <div>
+        <label for="balance">Balance</label>
+        <input
+          type="text"
+          name="balance"
+          id="balance"
+          formControlName="balance"
+        />
+      </div>
+      <div class="flex items-center my-4 justify-between">
+        <label for="type" name="type" id="type">Account type</label>
+        <select
+          name="type"
+          id="type"
+          class="text-sm mx-4"
+          formControlName="type"
+        >
+          <option value="checking">Checking</option>
+          <option value="saving">Saving</option>
+          <option value="business">Business</option>
+        </select>
+      </div>
+      <div class="flex gap-4 w-full">
+        <button type="submit" form="new-account" class="flex-grow">
+          Open account
+        </button>
+        <button (click)="onCancel()" type="button" class="flex-grow">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</app-model>

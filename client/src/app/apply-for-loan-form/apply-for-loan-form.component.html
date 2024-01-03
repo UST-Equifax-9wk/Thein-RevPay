@@ -1,0 +1,25 @@
+<app-model [modelState]="modelState">
+  <div class="w-full">
+    <h3
+      class="text-base font-semibold leading-6 text-gray-900"
+      id="modal-title"
+    >
+      Apply for loan
+    </h3>
+    <form (ngSubmit)="onApply()" id="apply-loan">
+      <label for="loanAmount">How much would you like for your loan?</label>
+      <input
+        type="text"
+        name="loanAmount"
+        id="loanAmount"
+        [(ngModel)]="amount"
+      />
+      <div class="flex gap-4 mt-8">
+        <button type="submit" form="apply-loan" class="flex-grow">Apply</button>
+        <button (click)="onCancel()" type="button" class="flex-grow">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</app-model>

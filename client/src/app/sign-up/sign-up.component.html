@@ -1,0 +1,212 @@
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+    <h1 class="text-3xl font-black text-center">
+      <span class="text-orange-700">Rev</span>
+      <span class="text-blue-900">Pay</span>
+    </h1>
+    <h2
+      class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900"
+    >
+      Create a new account
+    </h2>
+  </div>
+  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+    <form
+      class="space-y-6"
+      (ngSubmit)="onSubmit(form)"
+      #form="ngForm"
+      id="sign-up"
+    >
+      <div>
+        <label
+          for="first-name"
+          class="block text-sm font-medium leading-6 text-gray-900"
+          >First name</label
+        >
+        <div class="mt-2">
+          <input
+            [ngClass]="{
+              'ring-red-600': form.submitted && firstName.errors
+            }"
+            #firstName="ngModel"
+            [(ngModel)]="model.firstName"
+            id="first-name"
+            name="first-name"
+            type="text"
+            required
+            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          />
+          <div
+            *ngIf="form.submitted && firstName.errors"
+            class="text-xs text-red-600 py-2 font-semibold"
+          >
+            <div *ngIf="firstName.errors?.['required']">
+              First name is required.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <label
+          for="last-name"
+          class="block text-sm font-medium leading-6 text-gray-900"
+          >Last name</label
+        >
+        <div class="mt-2">
+          <input
+            [ngClass]="{
+              'ring-red-600': form.submitted && lastName.errors
+            }"
+            #lastName="ngModel"
+            [(ngModel)]="model.lastName"
+            id="last-name"
+            name="last-name"
+            type="text"
+            required
+            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          />
+          <div
+            *ngIf="form.submitted && lastName.errors"
+            class="text-xs text-red-600 py-2 font-semibold"
+          >
+            <div *ngIf="lastName.errors?.['required']">
+              Last name is required.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <label
+          for="username"
+          class="block text-sm font-medium leading-6 text-gray-900"
+          >Username</label
+        >
+        <div class="mt-2">
+          <input
+            [ngClass]="{ 'ring-red-600': form.submitted && username.errors }"
+            #username="ngModel"
+            [(ngModel)]="model.username"
+            id="username"
+            name="username"
+            type="username"
+            autocomplete="username"
+            required
+            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          />
+          <div
+            *ngIf="form.submitted && username.errors"
+            class="text-xs text-red-600 py-2 font-semibold"
+          >
+            <div *ngIf="username.errors?.['required']">
+              Username is required.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <label
+          for="email"
+          class="block text-sm font-medium leading-6 text-gray-900"
+          >Email address</label
+        >
+        <div class="mt-2">
+          <input
+            [ngClass]="{
+              'ring-red-600': form.submitted && email.errors
+            }"
+            [(ngModel)]="model.email"
+            #email="ngModel"
+            id="email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            required
+            email
+            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          />
+          <div
+            *ngIf="form.submitted && email.errors"
+            class="text-xs text-red-600 py-2 font-semibold"
+          >
+            <div *ngIf="email.errors?.['required']">Email is required.</div>
+            <div *ngIf="email.errors?.['email']">Not a valid email</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="flex items-center justify-between">
+          <label
+            for="password"
+            class="block text-sm font-medium leading-6 text-gray-900"
+            >Password</label
+          >
+        </div>
+        <div class="mt-2">
+          <input
+            [ngClass]="{ 'ring-red-600': form.submitted && password.errors }"
+            #password="ngModel"
+            [(ngModel)]="model.password"
+            id="password"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            required
+            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          />
+          <div
+            *ngIf="form.submitted && password.errors"
+            class="text-xs text-red-600 py-2 font-semibold"
+          >
+            <div *ngIf="password.errors?.['required']">
+              Password is required.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="flex items-center justify-between">
+          <label
+            for="password"
+            class="block text-sm font-medium leading-6 text-gray-900"
+            >Confirm password</label
+          >
+        </div>
+        <div class="mt-2">
+          <input
+            [ngClass]="{
+              'ring-red-600': form.submitted && confirmPassword.errors
+            }"
+            #confirmPassword="ngModel"
+            [(ngModel)]="model.confirmPassword"
+            id="confirmPassword"
+            name="confirmPassword"
+            type="password"
+            required
+            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          />
+          <div
+            *ngIf="form.submitted && confirmPassword.errors"
+            class="text-xs text-red-600 py-2 font-semibold"
+          >
+            <div *ngIf="confirmPassword.errors?.['required']">
+              Password is required.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex">
+        <button type="submit" class="flex-grow" form="sign-up">Sign up</button>
+      </div>
+      <a
+        routerLink="/sign-in"
+        class="flex w-full justify-center rounded-md bg-blue-900 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >Sign in</a
+      >
+    </form>
+  </div>
+</div>

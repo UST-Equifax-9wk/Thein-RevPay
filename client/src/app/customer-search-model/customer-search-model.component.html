@@ -1,0 +1,40 @@
+<app-model [modelState]="modelState">
+  <div class="w-full flex items-center justify-between gap-2">
+    <form class="flex items-center flex-grow" (ngSubmit)="onSearch()">
+      <input
+        [(ngModel)]="search"
+        type="search"
+        name="searchCustomer"
+        id="searchCustomer"
+        placeholder="Search by username or email..."
+      />
+      <button type="submit" class="h-8">Search</button>
+    </form>
+    <button (click)="onCancel()" class="h-8 mx-0">x</button>
+  </div>
+
+  <div class="min-h-96 w-full">
+    <table class="w-full text-left text-sm" [hidden]="!customers.length">
+      <thead class="border-b-4 h-9">
+        <tr>
+          <th>Username</th>
+          <th>First name</th>
+          <th>Last name</th>
+          <th>Email</th>
+          <th class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let customer of customers" class="h-14 border-b-2">
+          <td>{{ customer.username }}</td>
+          <td>{{ customer.firstName }}</td>
+          <td>{{ customer.lastName }}</td>
+          <td>{{ customer.email }}</td>
+          <td>
+            <button (click)="onSelect(customer)" class="text-xs">Select</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</app-model>

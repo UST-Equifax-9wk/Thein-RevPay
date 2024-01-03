@@ -1,0 +1,26 @@
+<div class="bg-white rounded-lg p-4 shadow-md my-4">
+  <h2 class="text-ml font-bold text-gray-600">Loans</h2>
+  <table class="table-auto w-full" *ngIf="loans.length">
+    <thead class="text-sm text-gray-600">
+      <tr>
+        <th class="px-2 py-2 text-left border-b-2">Loan amount</th>
+        <th class="px-2 py-2 text-center border-b-2">Application status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        class="border-b text-sm text-center font-semibold text-gray-600"
+        *ngFor="let loan of loans"
+      >
+        <td class="px-4 py-2 text-left">
+          <p>{{ loan.amount }}</p>
+        </td>
+        <td>
+          <p>
+            {{ loan.status }}
+          </p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

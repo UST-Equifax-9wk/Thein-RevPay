@@ -1,0 +1,301 @@
+<app-nav
+  ><div class="lg:px-4 lg:flex lg:flex-col lg:w-75% mt-5 mx-2">
+    <div class="flex gap-4">
+      <div class="bg-white rounded-lg p-4 shadow-md my-4 w-1/2">
+        <table class="table-auto w-full">
+          <thead>
+            <tr>
+              <th class="px-4 py-2 text-left border-b-2 w-full">
+                <h2 class="text-ml font-bold text-gray-600">Account details</h2>
+              </th>
+              <th class="border-b-2"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b w-full">
+              <td class="px-4 py-2 text-left align-top w-1/2">
+                <div class="text-sm font-bold text-gray-600">
+                  <h2>Account number</h2>
+                </div>
+              </td>
+              <td
+                class="px-4 py-2 text-right text-blue-900 text-sm font-semibold w-1/2"
+              >
+                <p>
+                  <span>{{ bankAccountDetail.accountNumber }}</span>
+                </p>
+              </td>
+            </tr>
+            <tr class="border-b w-full">
+              <td class="px-4 py-2 text-left align-top w-1/2">
+                <div class="text-sm font-bold text-gray-600">
+                  <h2>Routing number</h2>
+                </div>
+              </td>
+              <td
+                class="px-4 py-2 text-right text-blue-900 text-sm font-semibold w-1/2"
+              >
+                <p>
+                  <span>{{ bankAccountDetail.routingNumber }}</span>
+                </p>
+              </td>
+            </tr>
+            <tr class="border-b w-full">
+              <td class="px-4 py-2 text-left align-top w-1/2">
+                <div class="text-sm font-bold text-gray-600">
+                  <h2>Account type</h2>
+                </div>
+              </td>
+              <td
+                class="px-4 py-2 text-right text-blue-900 text-sm font-semibold w-1/2"
+              >
+                <p>
+                  <span>{{ bankAccountDetail.type | titlecase }}</span>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="bg-white rounded-lg p-4 shadow-md my-4 w-1/2 flex flex-col">
+        <div class="flex justify-center h-full py-4">
+          <div class="text-center flex flex-col gap-2">
+            <p class="text-xl font-semibold text-gray-600">Current balance</p>
+            <h2 class="text-4xl font-bold text-gray-600">
+              {{ bankAccountDetail.balance | currency }}
+            </h2>
+          </div>
+        </div>
+        <div class="flex justify-between gap-4">
+          <button
+            (click)="onSendMoney(false)"
+            class="flex w-full justify-center rounded-md bg-blue-900 px-6 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >
+            Send money
+          </button>
+          <button
+            (click)="onRequestMoney(false)"
+            class="flex w-full justify-center rounded-md bg-blue-900 px-6 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >
+            Request money
+          </button>
+          <button
+            (click)="onApplyForLoan(false)"
+            *ngIf="bankAccountDetail.type == 'business'"
+            class="flex w-full justify-center rounded-md bg-blue-900 px-6 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >
+            Request loan
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <app-cards [cards]="bankAccountDetail.cards"></app-cards>
+
+    <div class="my-4 flex justify-end">
+      <button
+        (click)="onAddCard(false)"
+        class="flex justify-center rounded-md bg-blue-900 px-6 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+      >
+        Add card
+      </button>
+    </div>
+
+    <app-loans
+      [loans]="bankAccountDetail.loans"
+      *ngIf="
+        bankAccountDetail.type === 'business' && bankAccountDetail.loans.length
+      "
+    ></app-loans>
+
+    <div class="bg-white rounded-lg p-4 shadow-md my-4">
+      <h2 class="text-ml font-bold text-gray-600">Incoming transactions</h2>
+      <table
+        class="table-auto w-full"
+        *ngIf="
+          bankAccountDetail.incomingTransactions.length;
+          else noIncomingTransaction
+        "
+      >
+        <thead class="text-sm text-gray-600">
+          <th class="px-2 py-2 text-left border-b-2 w-1/2">Description</th>
+          <th class="border-b-2">Date</th>
+          <th class="border-b-2">Status</th>
+          <th class="border-b-2">Amount</th>
+          <th class="border-b-2"></th>
+        </thead>
+        <tbody>
+          <tr
+            class="border-b w-full"
+            *ngFor="let transaction of bankAccountDetail.incomingTransactions"
+          >
+            <td class="px-4 py-2 text-left align-center">
+              <div>
+                <h2 class="text-sm font-semibold text-gray-600">
+                  {{ transaction.description }}
+                </h2>
+              </div>
+            </td>
+            <td class="px-4 py-2 text-center align-center">
+              <div>
+                <p class="text-xs font-semibold text-gray-600">
+                  {{ transaction.createdDate | date }}
+                </p>
+              </div>
+            </td>
+            <td class="px-4 py-2 text-center align-center">
+              <div
+                class="text-xs font-semibold text-gray-600 p-1 rounded-lg"
+                [ngClass]="{
+                  'bg-yellow-200 text-yellow-600':
+                    transaction.status === 'pending',
+                  'bg-blue-200 text-blue-600':
+                    transaction.status === 'approved',
+                  'bg-red-200 text-red-600': transaction.status === 'denied'
+                }"
+              >
+                {{ transaction.status | titlecase }}
+              </div>
+            </td>
+            <td
+              class="px-4 py-2 text-center text-sm font-semibold text-gray-600 align-center"
+            >
+              <div>
+                <p>
+                  <span>{{ transaction.amount | currency }}</span>
+                </p>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <ng-template #noIncomingTransaction>
+        <div
+          class="px-4 py-6 align-top text-center text-sm font-semibold text-gray-600"
+        >
+          No incoming transaction
+        </div>
+      </ng-template>
+      <hr />
+      <h2 class="text-ml font-bold text-gray-600 py-4">
+        Outgoing transactions
+      </h2>
+      <table
+        class="table-auto w-full"
+        *ngIf="
+          bankAccountDetail.outgoingTransactions.length;
+          else noOutgoingTransaction
+        "
+      >
+        <thead class="text-sm text-gray-600">
+          <th class="px-2 py-2 text-left border-b-2 w-1/2">Description</th>
+          <th class="border-b-2">Date</th>
+          <th class="border-b-2">Status</th>
+          <th class="border-b-2">Amount</th>
+          <th class="border-b-2">Actions</th>
+        </thead>
+        <tbody>
+          <tr
+            class="border-b w-full"
+            *ngFor="let transaction of bankAccountDetail.outgoingTransactions"
+          >
+            <td class="px-4 py-2 text-left align-center">
+              <div>
+                <h2 class="text-sm font-semibold text-gray-600">
+                  {{ transaction.description }}
+                </h2>
+              </div>
+            </td>
+            <td class="px-4 py-2 text-center align-center">
+              <div>
+                <p class="text-xs font-semibold text-gray-600">
+                  {{ transaction.createdDate | date }}
+                </p>
+              </div>
+            </td>
+            <td class="px-4 py-2 text-center align-center">
+              <div
+                class="text-xs font-semibold text-gray-600 p-1 rounded-lg"
+                [ngClass]="{
+                  'bg-yellow-200 text-yellow-600':
+                    transaction.status === 'pending',
+                  'bg-blue-200 text-blue-600':
+                    transaction.status === 'approved',
+                  'bg-red-200 text-red-600': transaction.status === 'denied'
+                }"
+              >
+                {{ transaction.status | titlecase }}
+              </div>
+            </td>
+            <td
+              class="px-4 py-2 text-center text-sm font-semibold text-gray-600 align-center"
+            >
+              <div>
+                <p>
+                  <span>{{ transaction.amount | currency }}</span>
+                </p>
+              </div>
+            </td>
+            <td>
+              <div
+                *ngIf="transaction.status == 'pending'"
+                class="justify-center px-4 py-2 text-center text-sm font-semibold text-gray-600 align-center flex gap-2"
+              >
+                <div>
+                  <button
+                    (click)="onApprove(transaction.id)"
+                    class="bg-blue-900 text-white text-xs font-semibold p-2 rounded-md min-w-16"
+                  >
+                    Approve
+                  </button>
+                </div>
+                <div>
+                  <button
+                    (click)="onDecline(transaction.id)"
+                    class="bg-red-800 text-white text-xs font-semibold p-2 rounded-md min-w-16"
+                  >
+                    Decline
+                  </button>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <ng-template #noOutgoingTransaction>
+        <div
+          class="px-4 py-2 align-top text-center text-sm font-semibold text-gray-600"
+        >
+          No outgoing transaction
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+  <app-send-money-form
+    [senderAccount]="bankAccountDetail"
+    (onCancelEvent)="onSendMoney($event)"
+    [formState]="sendMoneyFormState"
+  ></app-send-money-form>
+
+  <app-request-money-form
+    (onCancelEvent)="onRequestMoney($event)"
+    [receiverAccount]="bankAccountDetail"
+    [formState]="requestMoneyFormState"
+  >
+  </app-request-money-form>
+
+  <app-add-card-form
+    [modelState]="addCardFormState"
+    (onCancelEvent)="onAddCard($event)"
+  >
+  </app-add-card-form>
+
+  <app-apply-for-loan-form
+    [modelState]="applyForLoanFormState"
+    (onCancelEvent)="onApplyForLoan($event)"
+    [senderAccount]="bankAccountDetail"
+  >
+  </app-apply-for-loan-form>
+</app-nav>
