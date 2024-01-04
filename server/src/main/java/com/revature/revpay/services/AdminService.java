@@ -39,7 +39,7 @@ public class AdminService {
     }
 
     public Cookie createCookieWithUsername(String username) {
-        Cookie c = new Cookie("username", username);
+        Cookie c = new Cookie("admin", username);
         c.setPath("/");
         int MAX_COOKIE_AGE = 60 * 60 * 24 * 7;
         c.setMaxAge(MAX_COOKIE_AGE);

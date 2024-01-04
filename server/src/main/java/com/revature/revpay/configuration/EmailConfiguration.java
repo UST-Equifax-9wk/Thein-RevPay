@@ -14,9 +14,9 @@ public class EmailConfiguration {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
-        // Need to add Google Application password
-        // mailSender.setPassword("");
         mailSender.setUsername("th.hein04@gmail.com");
+        // Need to add Google application password
+        // mailSender.setPassword("");
         Properties properties = mailSender.getJavaMailProperties();
         properties.put("mail.smtp.starttls.enable", "true");
         return mailSender;

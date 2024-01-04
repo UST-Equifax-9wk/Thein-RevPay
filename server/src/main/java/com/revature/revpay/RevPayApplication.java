@@ -21,10 +21,11 @@ public class RevPayApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(@NonNull CorsRegistry registry) {
-				registry.addMapping("/**").allowedOrigins("http://localhost:4200")
+				registry.addMapping("/**")
+						.allowedOrigins("http://localhost:4200")
+						.allowedMethods("*")
 						.allowedHeaders("*")
-						.allowCredentials(true)
-						.allowedMethods("*");
+						.allowCredentials(true);
 			}
 		};
 	}
