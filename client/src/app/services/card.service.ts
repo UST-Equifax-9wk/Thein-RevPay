@@ -13,12 +13,13 @@ export class CardService {
     let url = BASE_URL + '/cards';
     let options: object = {
       observe: 'response',
+      withCredentials: true,
     };
     return this.http.post<HttpResponse<CardResponse>>(url, body, options);
   }
   deleteCard(cardId: string): Observable<CardResponse> {
     let url = BASE_URL + `/cards/${cardId}`;
-    let options: object = {};
+    let options: object = { withCredentials: true };
     return this.http.delete<CardResponse>(url, options);
   }
 }

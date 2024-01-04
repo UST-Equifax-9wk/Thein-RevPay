@@ -24,6 +24,7 @@ export class UserService {
       username = usernameOrEmail;
     }
     let url: string = `${BASE_URL}/users?username=${username}&email=${email}`;
-    return this.http.get(url);
+    let options: object = { withCredentials: true };
+    return this.http.get(url, options);
   }
 }

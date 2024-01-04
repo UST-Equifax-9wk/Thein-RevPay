@@ -10,7 +10,7 @@ export class LoanService {
 
   applyForLoan(body: object) {
     let url: string = `${BASE_URL}/loans`;
-    let options: object = { observe: 'response' };
+    let options: object = { observe: 'response', withCredentials: true };
     return this.http.post(url, body, options);
   }
 }

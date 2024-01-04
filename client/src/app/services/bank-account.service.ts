@@ -14,18 +14,20 @@ export class BankAccountService {
   fetchBankAccounts(): Observable<object> {
     let principalId: string = (this.authService.principal as Principal).id;
     let url: string = `${BASE_URL}/users/${principalId}/bank-accounts`;
-    return this.http.get(url);
+    let options: object = { withCredentials: true };
+    return this.http.get(url, options);
   }
 
   fetchBankAccount(bankAccountId: string): Observable<object> {
     let principalId: string = (this.authService.principal as Principal).id;
     let url: string = `${BASE_URL}/users/${principalId}/bank-accounts/${bankAccountId}`;
-    return this.http.get(url);
+    let options: object = { withCredentials: true };
+    return this.http.get(url, options);
   }
 
   openNewBankAccount(body: BankAccountRequestBody): Observable<object> {
     let url: string = `${BASE_URL}/users/${body.accountHolderId}/bank-accounts`;
-    let options: object = {};
+    let options: object = { withCredentials: true };
     return this.http.post(url, body, options);
   }
 }

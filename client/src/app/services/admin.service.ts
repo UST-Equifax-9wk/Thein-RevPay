@@ -25,10 +25,13 @@ export class AdminService {
   }
 
   getAdminByUsername(username: string): Observable<AdminResponse> {
-    return this.http.get<AdminResponse>(`${BASE_URL}/admins/${username}`);
+    let url: string = `${BASE_URL}/admins/${username}`;
+    let options: object = { withCredentials: true };
+    return this.http.get<AdminResponse>(url, options);
   }
   approveLoan(loan: LoanResponse) {
-    let options: object = {};
-    return this.http.post(`${BASE_URL}/loans/${loan.id}`, loan, options);
+    let url: string = `${BASE_URL}/loans/${loan.id}`;
+    let options: object = { withCredentials: true };
+    return this.http.post(url, loan, options);
   }
 }

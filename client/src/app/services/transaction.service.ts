@@ -12,13 +12,13 @@ export class TransactionService {
 
   sendMoney(transaction: object): Observable<object> {
     let url: string = `${BASE_URL}/transactions/send`;
-    let options: object = {};
+    let options: object = { withCredentials: true };
     return this.http.post(url, transaction, options);
   }
 
   requestMoney(transaction: object) {
     let url = `${BASE_URL}/transactions/request`;
-    let options: object = {};
+    let options: object = { withCredentials: true };
     return this.http.post(url, transaction, options);
   }
 
@@ -31,7 +31,7 @@ export class TransactionService {
 
   decline(transactionId: string): Observable<HttpResponse<Transaction>> {
     let url: string = `${BASE_URL}/transactions/${transactionId}`;
-    let options: object = { obserbe: 'response' };
+    let options: object = { obserbe: 'response', withCredentials: true };
     return this.http.delete<HttpResponse<Transaction>>(url, options);
   }
 }

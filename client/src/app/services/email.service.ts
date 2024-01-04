@@ -11,6 +11,7 @@ export class EmailService {
 
   sendEmail(email: object): Observable<object> {
     let url: string = `${BASE_URL}/emails`;
-    return this.http.post(url, email);
+    let options: object = { withCredentials: true };
+    return this.http.post(url, email, options);
   }
 }
